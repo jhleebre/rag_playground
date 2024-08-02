@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/rag.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="rag-manager">
+    <div class="query">
+        <form id="query-form">
+            <div class="form-group">
+                <div>
+                    <label for="collection-select">Collection:</label>
+                    <select id="collection-select" name="collection">
+                        <!-- Collections will be loaded here -->
+                        {% for collection in collections %}
+                            <option value="{{ collection.id }}" {% if collection_id == collection.id %}selected{% endif %}>{{ collection.name }} ({{ collection.model.id }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="results-number">Number of results:</label>
+                    <input type="number" id="results-number" name="results_number" value="{{ results_number }}" min="1" max="100">
+                </div>
+                <div>
+                    <label for="model-select">LLM Model:</label>
+                    <select id="model-select" name="model">
+                        <!-- LLM models will be loaded here -->
+                        {% for model in models %}
+                            <option value="{{ model }}" {% if llm_model == model %}selected{% endif %}>{{ model }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="temperature">Temperature:</label>
+                    <input type="number" id="temperature" name="temperature" value="{{ temperature }}" step="0.1" min="0" max="1">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="query-input">Enter your query:</label>
+                <input type="text" id="query-input" name="query" value="{{ query }}" required>
+                <button type="submit" class="btn">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="results">
+        <div class="search-results">
+            <h3>Search Results</h3>
+            <div id="search-results-list">
+                <!-- Search results will be loaded here -->
+            </div>
+        </div>
+        <div class="rag">
+            <h3>System Prompt</h3>
+            <textarea id="system-prompt-text" class="system-prompt-text">{{ system_prompt }}</textarea>
+            <h3>RAG Result</h3>
+            <div id="rag-results-list">
+                <!-- RAG results will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/rag.js') }}"></script>
+{% endblock %}

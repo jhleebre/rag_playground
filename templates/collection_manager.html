@@ -1,0 +1,136 @@
+{% extends 'layout.html' %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/collection_manager.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="collection-manager">
+    <div class="collections">
+        <h3>Collections</h3>
+        <div id="collections-list">
+            <!-- Collections will be loaded here -->
+        </div>
+        <button id="new-collection-btn" class="btn">New collection</button>
+    </div>
+    <div class="management">
+        <h3>Management</h3>
+        <div id="management-details">
+            <!-- Details will be loaded here -->
+        </div>
+        <div class="button-group">
+            <button id="upload-btn" class="btn" data-enabled="false">Upload a new file</button>
+            <button id="open-chunks-btn" class="btn" data-enabled="false">Open chunk list</button>
+        </div>
+        <div class="button-group">
+            <button id="delete-btn" class="btn" data-enabled="false">Delete selected files</button>
+            <button id="delete-collection-btn" class="btn" data-enabled="false">Delete collection</button>
+        </div>
+    </div>
+</div>
+
+<!-- New Collection Modal -->
+<div id="new-collection-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>New Collection</h2>
+        <form id="new-collection-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+            </div>
+            <div class="form-group">
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+            </div>
+            <div class="form-group">
+                <input type="text" id="description" name="description" required>
+            </div>
+            <div class="form-group">
+                <label for="model_id">Embedding Model:</label>
+            </div>
+            <div class="form-group">
+                <select id="model_id" name="model_id" required>
+                    {% for model in embedding_models %}
+                    <option value="{{ model }}">{{ model }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Create</button>
+            </div>
+            <div id="error-message" class="error-message" style="color: red; display: none;"></div>
+        </form>
+    </div>
+</div>
+
+<!-- Upload Modal -->
+<div id="upload-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Upload File</h2>
+        <form id="upload-form">
+            <div class="form-group">
+                <label for="upload-file">Select file:</label>
+            </div>
+            <div class="form-group">
+                <input type="file" id="upload-file" name="file" required>
+            </div>
+            <div class="form-group">
+                <label for="split-method">Split Method:</label>
+            </div>
+            <div class="form-group">
+                <select id="split-method" name="split_method">
+                    <option value="plain_text">Plain Text</option>
+                    <option value="markup_text">Markup Text</option>
+                </select>
+            </div>
+            <div class="form-group split-options">
+                <label for="chunk-size">Chunk Size:</label>
+            </div>
+            <div class="form-group split-options">
+                <input type="number" id="chunk-size" name="chunk_size" value="500" min="1">
+            </div>
+            <div class="form-group split-options">
+                <label for="chunk-overlap">Chunk Overlap:</label>
+            </div>
+            <div class="form-group split-options">
+                <input type="number" id="chunk-overlap" name="chunk_overlap" value="100" min="0">
+            </div>
+            <div class="form-group">
+                <label for="splitter">Splitter:</label>
+            </div>
+            <div class="form-group">
+                <select id="splitter" name="splitter">
+                    <option value="TOKEN_TEXT">TOKEN_TEXT</option>
+                    <option value="CHARACTER_TEXT">CHARACTER_TEXT</option>
+                    <option value="RECURSIVE_CHARACTER_TEXT">RECURSIVE_CHARACTER_TEXT</option>
+                    <option value="MARKDOWN_TEXT">MARKDOWN_TEXT</option>
+                    <option value="NO_SPLIT">NO_SPLIT</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Upload</button>
+            </div>
+            <div id="upload-error-message" class="error-message" style="color: red; display: none;"></div>
+        </form>
+    </div>
+</div>
+
+<!-- Chunks Modal -->
+<div id="chunks-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Chunk List</h2>
+        <p>This is the list of the chunks (max 100).</p>
+        <div id="chunks-list">
+            <!-- Chunks will be loaded here -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/collection_manager.js') }}"></script>
+{% endblock %}

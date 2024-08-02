@@ -1,0 +1,53 @@
+/* Common styles for the entire application */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #e9ecef;
+    color: #212529;
+    text-align: left;
+    padding: 1px 20px;
+}
+
+header h1 a {
+    color: #212529;
+    text-decoration: none;
+}
+.container {
+    display: flex;
+}
+
+aside {
+    background-color: #e9ecef;
+    color: #212529;
+    width: 200px; /* Fixed width for the sidebar */
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: bold;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+aside nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+aside nav ul li {
+    margin: 20px 0;
+}
+
+aside nav ul li a {
+    color: #212529;
+    text-decoration: none;
+}
+
+main {
+    flex-grow: 1;
+    padding: 0px;
+    min-width: 0; /* Ensure the main content can shrink below the initial size */
+}

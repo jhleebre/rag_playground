@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Playground</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    {% block additional_styles %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1><a href="{{ url_for('index') }}">RAG Playground</a></h1>
+    </header>
+    <div class="container">
+        <aside>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Collection Manager</a></li>
+                    <li><a href="{{ url_for('rag_page') }}">RAG</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

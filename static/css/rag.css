@@ -1,0 +1,233 @@
+/* Styles specific to the RAG page */
+
+/* Main container for the RAG page */
+.rag-manager {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 90px); /* Full height minus header */
+}
+
+/* Query section styles */
+.query {
+    height: auto;
+    padding: 20px;
+    padding-bottom: 0;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #e9ecef; /* Light grey border */
+}
+
+/* Form group styles for consistent layout */
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping of flex items */
+    align-items: center;
+    gap: 20px; /* Space between items */
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #e9ecef; /* Light border */
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-group input[type="number"] {
+    max-width: 100px; /* Set a maximum width for number inputs */
+}
+
+/* Query button specific styles */
+.query .btn {
+    background-color: #adb5bd;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 0;
+    width: auto; /* Auto width based on content */
+    box-sizing: border-box;
+}
+
+.query .btn:hover {
+    background-color: #6c757d; /* Darker grey on hover */
+}
+
+/* Results section container */
+.results {
+    display: flex;
+    flex-grow: 1;
+    height: calc(100vh - 240px); /* Adjusted height for the results section */
+}
+
+/* Styles for search results and RAG sections */
+.search-results, 
+.rag {
+    flex: 1;
+    padding: 20px;
+    padding-top: 0;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #e9ecef; /* Light grey border */
+    overflow-y: auto; /* Scrollable content */
+    width: 45%;
+}
+
+.rag {
+    padding-top: 0;
+    margin-left: 0px; /* Adjust margin for separation */
+    max-height: 100%; /* Ensure it takes the full height */
+    width: 45%; /* Fixed width for consistency */
+    display: flex;
+    flex-direction: column;
+}
+
+.system-prompt-text {
+    width: 100%;
+    height: 25%; /* Adjust height */
+    padding: 15px;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    font-size: 16px; /* Larger font size */
+    line-height: 1.5; /* Improved line height for readability */
+    background-color: #f8f9fa; /* Light background color for better contrast */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: #333; /* Darker font color for better readability */
+    box-sizing: border-box;
+    resize: none; /* Prevent resizing */
+}
+
+.rag-results #rag-results-list {
+    overflow-y: auto;
+    max-height: calc(66.67% - 40px); /* Adjust for padding */
+    border: 1px solid #e9ecef;
+}
+
+/* Card styles for search results */
+.card {
+    border: 1px solid #e9ecef; /* Light grey border */
+    padding: 15px;
+    margin-bottom: 5px;
+    background-color: #f8f9fa; /* Slightly lighter background */
+    font-size: 16px; /* Larger font size */
+    line-height: 1.6; /* Improved line height for readability */
+}
+
+.card p {
+    margin: 2px;
+}
+
+/* Styles for the generated markdown content */
+#rag-results-list h1,
+#rag-results-list h2,
+#rag-results-list h3,
+#rag-results-list h4,
+#rag-results-list h5,
+#rag-results-list h6 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#rag-results-list p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+#rag-results-list ul,
+#rag-results-list ol {
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+#rag-results-list code {
+    background-color: #f1f1f1;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+#rag-results-list pre {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+#rag-results-list blockquote {
+    border-left: 4px solid #ddd;
+    padding-left: 10px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+#rag-results-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+#rag-results-list th,
+#rag-results-list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#rag-results-list th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .form-group {
+        flex-direction: column; /* Stack items vertically */
+        align-items: stretch; /* Stretch items to full width */
+    }
+
+    .form-group label,
+    .form-group input,
+    .form-group select {
+        margin-bottom: 10px; /* Add bottom margin for spacing */
+        width: 100%; /* Full width */
+    }
+
+    .query .btn {
+        width: 100%; /* Full width for button */
+    }
+
+    .search-results,
+    .rag {
+        width: 100%; /* Full width for search results and RAG sections */
+    }
+
+    .rag-results #rag-results-list {
+        max-height: none;
+    }
+}
+
+/* RAG result styles */
+#rag-results-list {
+    height: calc(100% - 200px); /* Adjust this value to set the desired fixed height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #e9ecef; /* Add a border to separate the content */
+    background-color: white; /* Set a background color */
+    border-radius: 4px; /* Add border radius for rounded corners */
+}
+
+/* Loading message style */
+.loading-message {
+    font-size: 1.3em; /* Larger font size */
+    text-align: left; /* Align text to the left */
+}
