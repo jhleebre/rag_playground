@@ -323,7 +323,10 @@ def generate_answer():
         # Raise an error if the request was unsuccessful
         response.raise_for_status()
         # Convert the generated content to HTML using markdown
-        return jsonify({'content': markdown.markdown(response['choices'][0]['message']['content'])})
+        generated_content = response.json()['choices'][0]['message']['content']
+        html_content = markdown.markdown(generated_content)
+
+        return jsonify({'content': html_content})
 
     except requests.RequestException as e:
         error_message = response.json().get('error', {}).get('message', str(e))
