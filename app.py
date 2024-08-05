@@ -16,8 +16,10 @@ del os.environ['LLM_MODELS']
 
 # Load environment variables from .env file
 dotenv_path = dotenv.find_dotenv()
+'''
 print("==="*20)
 print(f'Load .env file from: {dotenv_path}')
+'''
 dotenv.load_dotenv(dotenv_path)
 
 # Retrieve API_KEY, API_BASE, and EMBEDDING_MODELS from environment variables
@@ -30,6 +32,7 @@ LLM_API_KEY = os.getenv('LLM_API_KEY')
 LLM_API_URL = os.getenv('LLM_API_URL')
 LLM_MODELS = os.getenv('LLM_MODELS').split(',')
 
+'''
 print(f'  - RAG API KEY: {API_KEY}')
 print(f'  - RAG API URL: {API_BASE}')
 print(f'  - EMBEDDING: {EMBEDDING_MODELS}')
@@ -37,6 +40,7 @@ print(f'  - LLM API KEY: {LLM_API_KEY}')
 print(f'  - LLM API URL: {LLM_API_URL}')
 print(f'  - LLM: {LLM_MODELS}')
 print("==="*20)
+'''
 
 # Initialize Flask application
 app = Flask(__name__)
@@ -336,6 +340,7 @@ def generate_answer():
         "temperature": temperature
     }
 
+    '''
     print("==="*20)
     print('send a request to LLM to generate an answer.')
     print(f'  - url: {LLM_API_URL}')
@@ -343,6 +348,7 @@ def generate_answer():
     print(f'  - messages: {json.dumps(messages, indent=3)}')
     print(f'  - temperature: {temperature}')
     print("==="*20)
+    '''
 
     try: 
         # Send a POST request to the API
