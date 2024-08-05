@@ -336,6 +336,14 @@ def generate_answer():
         "temperature": temperature
     }
 
+    print("==="*20)
+    print('send a request to LLM to generate an answer.')
+    print(f'  - url: {LLM_API_URL}')
+    print(f'  - model: {model}')
+    print(f'  - messages: {json.dumps(messages, indent=3)}')
+    print(f'  - temperature: {temperature}')
+    print("==="*20)
+
     try: 
         # Send a POST request to the API
         response = requests.post(LLM_API_URL, headers=headers, json=request_data)
