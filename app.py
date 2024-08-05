@@ -2,12 +2,23 @@ import os
 import json
 import markdown
 import requests
-from dotenv import load_dotenv
+import dotenv
 from flask_session import Session
 from flask import Flask, render_template, session, request, jsonify
 
+# Clear environment variables
+del os.environ['API_KEY']
+del os.environ['API_BASE']
+del os.environ['EMBEDDING_MODELS']
+del os.environ['LLM_API_KEY']
+del os.environ['LLM_API_URL']
+del os.environ['LLM_MODELS']
+
 # Load environment variables from .env file
-load_dotenv()
+dotenv_path = dotenv.find_dotenv()
+print("==="*20)
+print(f'Load .env file from: {dotenv_path}')
+dotenv.load_dotenv(dotenv_path)
 
 # Retrieve API_KEY, API_BASE, and EMBEDDING_MODELS from environment variables
 API_KEY = os.getenv('API_KEY')
@@ -18,6 +29,14 @@ EMBEDDING_MODELS = os.getenv('EMBEDDING_MODELS').split(',')
 LLM_API_KEY = os.getenv('LLM_API_KEY')
 LLM_API_URL = os.getenv('LLM_API_URL')
 LLM_MODELS = os.getenv('LLM_MODELS').split(',')
+
+print(f'  - RAG API KEY: {API_KEY}')
+print(f'  - RAG API URL: {API_BASE}')
+print(f'  - EMBEDDING: {EMBEDDING_MODELS}')
+print(f'  - LLM API KEY: {LLM_API_KEY}')
+print(f'  - LLM API URL: {LLM_API_URL}')
+print(f'  - LLM: {LLM_MODELS}')
+print("==="*20)
 
 # Initialize Flask application
 app = Flask(__name__)

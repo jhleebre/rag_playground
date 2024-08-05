@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchResultsList = document.getElementById('search-results-list');
     const systemPromptText = document.getElementById('system-prompt-text');
     const ragResultsList = document.getElementById('rag-results-list');
-    const searchButton = queryForm.querySelector('button[type="submit"]');
+    const submitButton = queryForm.querySelector('button[type="submit"]');
     let loadingInterval;
 
     // Function to start the loading animation
@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
         clearInterval(loadingInterval);
     }
 
-    // Fetch document details by document ID
-    async function fetchDocumentDetails(documentId) {
+    // Fetch document name by document ID
+    async function fetchDocumentName(documentId) {
         try {
             const response = await fetch(`/document_status/${documentId}`);
             if (!response.ok) {
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const collectionName = collectionSelect.options[collectionSelect.selectedIndex].text;
         const numResults = parseInt(resultsNumberInput.value, 10);
         const model = modelSelect.value;
-        const temperature = parseFloat(temperatureInput.value);
+        const temperature = parseFloat(temperatureInput.value, 0.7);
         const query = queryInput.value;
         const systemPrompt = systemPromptText.value;
 
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             // Disable the search button and show loading message
-            searchButton.disabled = true;
+            submitButton.disabled = true;
             startLoadingAnimation(ragResultsList, 'Fetching search results');
 
             const response = await fetch('/search', {
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const searchResultsContent = [];
             for (const result of searchResults.data) {
-                const documentName = await fetchDocumentDetails(result.document_id);
+                const documentName = await fetchDocumentName(result.document_id);
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
             stopLoadingAnimation();
         } finally {
             // Re-enable the search button
-            searchButton.disabled = false;
+            submitButton.disabled = false;
         }
     });
 });
