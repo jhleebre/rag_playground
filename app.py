@@ -3,16 +3,21 @@ import json
 import markdown
 import requests
 import dotenv
-from flask_session import Session
 from flask import Flask, render_template, session, request, jsonify
 
 # Clear environment variables
-del os.environ['API_KEY']
-del os.environ['API_BASE']
-del os.environ['EMBEDDING_MODELS']
-del os.environ['LLM_API_KEY']
-del os.environ['LLM_API_URL']
-del os.environ['LLM_MODELS']
+if "API_KEY" in os.environ:  
+    del os.environ['API_KEY']
+if "API_BASE" in os.environ:
+    del os.environ['API_BASE']
+if "EMBEDDING_MODELS" in os.environ:
+    del os.environ['EMBEDDING_MODELS']
+if "LLM_API_KEY" in os.environ:
+    del os.environ['LLM_API_KEY']
+if "LLM_API_URL" in os.environ:
+    del os.environ['LLM_API_URL']
+if "LLM_MODELS" in os.environ:
+    del os.environ['LLM_MODELS']
 
 # Load environment variables from .env file
 dotenv_path = dotenv.find_dotenv()
@@ -50,7 +55,6 @@ app.secret_key = os.urandom(24)
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config['SESSION_TYPE'] = 'filesystem'
-Session(app)
 
 # Route for the homepage which renders the collection manager template
 @app.route('/')
