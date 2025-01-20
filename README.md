@@ -57,16 +57,16 @@ Create a `.env` file in your project root directory and set it up like this:
 API_KEY=your_rag_api_key_here
 
 # RAG URL
-API_BASE=https://api.platform.a15t.com
+API_BASE=https://api.openai.com
 
 # Embedding Models (separated by commas)
-EMBEDDING_MODELS=openai/text-embedding-ada-002,openai/text-embedding-3-small,openai/text-embedding-3-large
+EMBEDDING_MODELS=text-embedding-3-small
 
 # LLM API key
 LLM_API_KEY=your_llm_api_key_here
 
 # LLM API URL
-LLM_API_URL=https://api.platform.a15t.com/v1/chat/completions
+LLM_API_URL=https://api.openai.com/v1/chat/completions
 
 # List of models to use (separated by commas)
 LLM_MODELS=gpt-3.5-turbo,gpt-4o
